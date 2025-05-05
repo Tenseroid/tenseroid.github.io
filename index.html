@@ -1,31 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tenseroid - Master of Time</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tenseroid</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: black;
-      color: white;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      padding-top: 50px;
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      color: #fff;
     }
+
     h1 {
-      font-size: 48px;
-      color: #FF4500;
-      text-shadow: 3px 3px 10px #ff0000;
+      font-size: 3em;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #00f5ff;
     }
-    p {
-      font-size: 24px;
-      color: #FFFFFF;
+
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      background-color: transparent;
+      border: 2px solid #00f5ff;
+      border-radius: 50px;
+      color: #00f5ff;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .btn:hover {
+      background-color: #00f5ff;
+      color: #000;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00f5ff;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.9em;
+      opacity: 0.7;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to Tenseroid's Domain</h1>
-  <p>Master of Time, Ruler of Grammar</p>
-  <p>Nothing exists without Tenseroid's will!</p>
+  <h1>Welcome to TENSEROID 👑</h1>
+  <div class="btn-container">
+    <a href="https://instagram.com/tenseroid" target="_blank" class="btn">📸 Instagram</a>
+    <a href="https://discord.com/users/tenseroid" target="_blank" class="btn">💬 Discord</a>
+    <a href="https://youtube.com/@tenseroid" target="_blank" class="btn">🎥 YouTube</a>
+  </div>
+  <div class="footer">Made by Tenseroid ⚡</div>
 </body>
 </html>
+
