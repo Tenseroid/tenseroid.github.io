@@ -1,4 +1,4 @@
-// Particles.js
+// Particles.js code for glowing particles effect
 particlesJS("particles-js", {
   particles: {
     number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -30,39 +30,4 @@ particlesJS("particles-js", {
     },
   },
   retina_detect: true,
-});
-
-// Typewriter effect
-const text = "Welcome to the official website of Tenseroid";
-let index = 0;
-function typeEffect() {
-  if (index < text.length) {
-    document.getElementById("typewriter-text").textContent += text.charAt(index);
-    index++;
-    setTimeout(typeEffect, 50);
-  }
-}
-typeEffect();
-
-// Anime Quotes
-const quotes = [
-  '"A lesson without pain is meaningless." – Edward Elric',
-  '"Power comes in response to a need, not a desire." – Goku',
-  '"I am justice! I protect the innocent!" – Light Yagami (lol)',
-  '"Fear is not evil. It tells you what your weakness is." – Gildarts',
-  '"Give up on your dreams and just D!e" – Levi Ackerman (Bauna)'
-];
-setInterval(() => {
-  const quoteBox = document.getElementById("quote-box");
-  quoteBox.textContent = quotes[Math.floor(Math.random() * quotes.length)];
-}, 10000);
-
-// Easter Egg
-let typed = '';
-window.addEventListener('keypress', e => {
-  typed += e.key.toLowerCase();
-  if (typed.includes("aizen")) {
-    alert("🎴 Scatter: Kyōka Suigetsu 🌙");
-    typed = '';
-  }
 });
