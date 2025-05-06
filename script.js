@@ -1,4 +1,4 @@
-// Particles
+// Particles.js
 particlesJS("particles-js", {
   particles: {
     number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -32,7 +32,7 @@ particlesJS("particles-js", {
   retina_detect: true,
 });
 
-// Typewriter
+// Typewriter effect
 const text = "Welcome to the official website of Tenseroid";
 let index = 0;
 function typeEffect() {
@@ -50,7 +50,7 @@ const quotes = [
   '"Power comes in response to a need, not a desire." – Goku',
   '"I am justice! I protect the innocent!" – Light Yagami (lol)',
   '"Fear is not evil. It tells you what your weakness is." – Gildarts',
-  '"Give up on your dreams and just die" – Levi Ackerman (bauna)'
+  '"Give up on your dreams and just D!e" – Levi Ackerman (Bauna)'
 ];
 setInterval(() => {
   const quoteBox = document.getElementById("quote-box");
@@ -62,7 +62,7 @@ let typed = '';
 window.addEventListener('keypress', e => {
   typed += e.key.toLowerCase();
   if (typed.includes("aizen")) {
-    alert("🎴 Bankai Activated: Kyōka Suigetsu 🌙");
+    alert("🎴 Scatter: Kyōka Suigetsu 🌙");
     typed = '';
   }
 });
