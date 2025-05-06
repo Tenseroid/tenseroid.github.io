@@ -1,24 +1,25 @@
+/* Global Styles */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body {
+  margin: 0;
+  padding: 0;
   font-family: 'Orbitron', sans-serif;
   background: radial-gradient(circle, #0d0d0d 0%, #000000 100%);
-  color: #ff003c;
+  overflow: hidden;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  overflow: hidden;
+  color: #ff003c;
 }
 
-h1.glitch-text {
+h1 {
   font-size: 3em;
-  text-align: center;
+  margin-bottom: 30px;
   text-shadow: 0 0 20px #ff003c, 0 0 40px #ff003c;
   animation: glitch 1s infinite;
 }
@@ -32,18 +33,12 @@ h1.glitch-text {
   100% { transform: translate(0); }
 }
 
-.typewriter {
-  font-size: 1.5em;
-  margin-top: 20px;
-  text-align: center;
-}
-
+/* Button Styles */
 .btn-container {
   display: flex;
   flex-direction: column;
   gap: 15px;
   z-index: 10;
-  margin-top: 40px;
 }
 
 .btn {
@@ -57,6 +52,7 @@ h1.glitch-text {
   transition: all 0.3s ease;
   text-decoration: none;
   text-align: center;
+  position: relative;
 }
 
 .btn:hover {
@@ -66,6 +62,7 @@ h1.glitch-text {
   box-shadow: 0 0 20px #ff003c, 0 0 40px #ff003c;
 }
 
+/* Footer Styles */
 .footer {
   position: absolute;
   bottom: 15px;
@@ -75,6 +72,7 @@ h1.glitch-text {
   z-index: 10;
 }
 
+/* Particle Styles */
 #particles-js {
   position: fixed;
   width: 100%;
@@ -84,12 +82,7 @@ h1.glitch-text {
   left: 0;
 }
 
-.quote {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.5em;
-  color: #ff003c;
-  opacity: 0.8;
+/* Hide Audio Element */
+audio {
+  display: none;
 }
