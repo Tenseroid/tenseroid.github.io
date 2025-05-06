@@ -22,22 +22,31 @@
       align-items: center;
       flex-direction: column;
       color: #ff003c;
+      opacity: 0;
+      transition: opacity 2s ease;
+    }
+
+    body.loaded {
+      opacity: 1;
     }
 
     h1 {
       font-size: 3em;
       margin-bottom: 30px;
       text-shadow: 0 0 20px #ff003c, 0 0 40px #ff003c;
-      animation: glitch 1s infinite;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #ff003c;
+      animation: typing 2s steps(30, end), blink 0.75s step-end infinite;
     }
 
-    @keyframes glitch {
-      0% { transform: translate(0); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(-2px, -2px); }
-      60% { transform: translate(2px, 2px); }
-      80% { transform: translate(2px, -2px); }
-      100% { transform: translate(0); }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
     }
 
     .btn-container {
@@ -55,16 +64,18 @@
       color: #ff003c;
       font-size: 1.2em;
       cursor: pointer;
-      transition: all 0.3s ease;
       text-decoration: none;
       text-align: center;
       position: relative;
+      transition: all 0.3s ease;
+      perspective: 800px;
+      transform-style: preserve-3d;
     }
 
     .btn:hover {
       background-color: #ff003c;
       color: #000;
-      transform: scale(1.1);
+      transform: scale(1.1) rotateX(5deg) rotateY(5deg);
       box-shadow: 0 0 20px #ff003c, 0 0 40px #ff003c;
     }
 
@@ -85,10 +96,61 @@
       top: 0;
       left: 0;
     }
+
+    .controls {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+    }
+
+    .control-btn {
+      padding: 8px 15px;
+      border: 2px solid #ff003c;
+      background: transparent;
+      color: #ff003c;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9em;
+    }
+
+    .control-btn:hover {
+      background-color: #ff003c;
+      color: #000;
+    }
+
+    .dark-mode {
+      background: radial-gradient(circle, #ffffff 0%, #b3b3b3 100%);
+      color: #000;
+    }
+
+    .dark-mode .btn,
+    .dark-mode .control-btn {
+      border-color: #000;
+      color: #000;
+    }
+
+    .dark-mode .btn:hover,
+    .dark-mode .control-btn:hover {
+      background-color: #000;
+      color: #fff;
+      box-shadow: 0 0 20px #000, 0 0 40px #000;
+    }
+
+    .dark-mode .footer {
+      color: #000;
+    }
   </style>
 </head>
 <body>
   <div id="particles-js"></div>
+  <div class="controls">
+    <button class="control-btn" id="music-toggle">🔊</button>
+    <button class="control-btn" id="mode-toggle">🌙</button>
+  </div>
   <h1>Yokoso Watashino Website</h1>
   <div class="btn-container">
     <a href="https://instagram.com/tenseroid" target="_blank" class="btn">📸 Instagram</a>
@@ -97,8 +159,18 @@
   </div>
   <div class="footer">Made by Tenseroid ⚡</div>
 
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-epic.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Particles -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
   <script>
+    window.addEventListener("load", () => {
+      document.body.classList.add("loaded");
+    });
+
     particlesJS("particles-js", {
       particles: {
         number: { value: 80, density: { enable: true, value_area: 800 } },
@@ -108,7 +180,7 @@
           stroke: { width: 0, color: "#000" },
           polygon: { nb_sides: 5 },
         },
-        opacity: { value: 0.5, random: false },
+        opacity: { value: 0.5 },
         size: { value: 3, random: true },
         line_linked: {
           enable: true,
@@ -121,8 +193,6 @@
           enable: true,
           speed: 3,
           direction: "none",
-          random: false,
-          straight: false,
           out_mode: "out",
         },
       },
@@ -138,6 +208,28 @@
         },
       },
       retina_detect: true,
+    });
+
+    // Music Toggle
+    const music = document.getElementById("bg-music");
+    const musicBtn = document.getElementById("music-toggle");
+    let isPlaying = false;
+
+    musicBtn.addEventListener("click", () => {
+      if (!isPlaying) {
+        music.play();
+        musicBtn.textContent = "🔇";
+      } else {
+        music.pause();
+        musicBtn.textContent = "🔊";
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // Dark Mode Toggle
+    const modeBtn = document.getElementById("mode-toggle");
+    modeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
     });
   </script>
 </body>
