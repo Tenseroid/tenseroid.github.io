@@ -50,7 +50,7 @@ const quotes = [
   '"Power comes in response to a need, not a desire." – Goku',
   '"I am justice! I protect the innocent!" – Light Yagami (lol)',
   '"Fear is not evil. It tells you what your weakness is." – Gildarts',
-  '"I am the storm that is approaching..." – Vergil (close enough 😈)'
+  '"Give up on your dreams and just die" – Levi Ackerman (bauna)'
 ];
 setInterval(() => {
   const quoteBox = document.getElementById("quote-box");
@@ -72,7 +72,7 @@ let typed = '';
 window.addEventListener('keypress', e => {
   typed += e.key.toLowerCase();
   if (typed.includes("aizen")) {
-    alert("🎴 Bankai Activated: Kyōka Suigetsu 🌙");
+    alert("🎴 Scatter: Kyōka Suigetsu 🌙");
     typed = '';
   }
 });
