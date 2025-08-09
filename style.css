@@ -1,73 +1,76 @@
 :root{
   --bg:#050405;
-  --deep:#050305;
   --accent-1:#ff003f;
   --accent-2:#ff6a88;
   --muted:#9aa0a6;
   --glass: rgba(255,0,79,0.06);
   --card-grad: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
   --max-width: 980px;
+  --safe-pad: 20px;
 }
 
-/* reset & base */
+/* Reset & base */
 *{box-sizing:border-box}
-html,body{height:100%;margin:0;background:var(--bg);font-family:Inter,Orbitron,system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans JP',sans-serif;color:#eaeaea;-webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;overflow-x:hidden}
-a{color:inherit}
+html,body{height:100%;margin:0;background:var(--bg);font-family:Inter,Orbitron,system-ui; color:#eaeaea; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
 
-/* background layers */
+/* Canvas sits below everything */
 #bgCanvas{position:fixed;inset:0;z-index:0;display:block}
-.fog{position:fixed;inset: -20% -40% -20% -40%;pointer-events:none;mix-blend-mode:screen;opacity:0.22;transform:translate3d(0,0,0)}
-.fog-a{background: radial-gradient(closest-side at 30% 30%, rgba(255,0,79,0.12), transparent 20%), radial-gradient(closest-side at 70% 70%, rgba(255,106,136,0.06), transparent 25%); animation: slowDrift 35s linear infinite}
-.fog-b{background: radial-gradient(closest-side at 10% 80%, rgba(255,0,79,0.06), transparent 8%), radial-gradient(closest-side at 90% 20%, rgba(255,106,136,0.04), transparent 12%); animation: slowDriftRev 48s linear infinite; opacity:0.18}
-.vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.75) 100%);mix-blend-mode:multiply;z-index:1}
+
+/* Fog layers (CSS gradients for performance) */
+.fog-layer{position:fixed;inset:-15% -40% -15% -40%;pointer-events:none;mix-blend-mode:screen;z-index:1}
+.fog-a{background:
+  radial-gradient(closest-side at 25% 30%, rgba(255,20,60,0.12), transparent 10%),
+  radial-gradient(closest-side at 80% 70%, rgba(255,106,136,0.06), transparent 14%); animation: drift 36s linear infinite; opacity:0.95}
+.fog-b{background:
+  radial-gradient(closest-side at 8% 80%, rgba(255,20,60,0.06), transparent 8%),
+  radial-gradient(closest-side at 90% 20%, rgba(255,106,136,0.04), transparent 12%); animation: driftRev 52s linear infinite; opacity:0.72}
+.vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 58%, rgba(0,0,0,0.78) 100%);mix-blend-mode:multiply;z-index:2}
 
 /* layout */
-.site{position:relative;z-index:3;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px}
-.card{width:min(var(--max-width),94vw);padding:30px;border-radius:12px;background:var(--card-grad);backdrop-filter: blur(8px);border:1px solid var(--glass);box-shadow:0 24px 80px rgba(0,0,0,0.7);text-align:center;position:relative}
+.site{position:relative;z-index:3;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(var(--safe-pad) * 1.2)}
+.card{width:min(var(--max-width),94vw);padding:28px;border-radius:12px;background:var(--card-grad);backdrop-filter:blur(8px);border:1px solid var(--glass);box-shadow:0 28px 90px rgba(0,0,0,0.7);text-align:center;position:relative}
 
 /* logo */
-.logo{height:78px;margin-bottom:6px;filter:drop-shadow(0 12px 36px rgba(255,0,79,0.12));transform-origin:center;transition:transform .6s cubic-bezier(.2,.9,.3,1)}
+.logo{height:86px;margin-bottom:6px;filter:drop-shadow(0 12px 36px rgba(255,0,79,0.12));transform-origin:center;transition:transform .6s cubic-bezier(.2,.9,.3,1)}
 
-/* heading / glitch */
-.brand{font-family:Orbitron, system-ui;font-size:clamp(34px,8vw,64px);margin:6px 0 10px;color:var(--accent-1);letter-spacing:3px;position:relative;display:inline-block}
+/* brand / glitch */
+.brand{font-family:Orbitron, system-ui;font-size:clamp(34px,8vw,72px);margin:6px 0 8px;color:var(--accent-1);letter-spacing:3px;position:relative;display:inline-block}
 .brand::before,.brand::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-.brand::before{left:2px;text-shadow:-8px 0 20px rgba(255,90,130,0.12);clip-path:polygon(0 0,100% 0,100% 60%,0 60%);opacity:0.9;transform:translateX(-6px) skewX(-4deg)}
-.brand::after{left:-2px;text-shadow:8px 0 30px rgba(255,20,60,0.08);clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);transform:translateX(6px) skewX(6deg);opacity:0.85}
-@keyframes glitchSlice {
-  0%{transform:translateX(0)}
-  20%{transform:translateX(-4px)}
-  40%{transform:translateX(2px)}
-  60%{transform:translateX(-3px)}
-  80%{transform:translateX(1px)}
-  100%{transform:translateX(0)}
-}
-.brand.glitch::before,.brand.glitch::after{animation:glitchSlice 3s infinite steps(6)}
+.brand::before{left:2px;text-shadow:-8px 0 20px rgba(255,90,130,0.12);clip-path:polygon(0 0,100% 0,100% 60%,0 60%);transform:translateX(-6px) skewX(-4deg);}
+.brand::after{left:-2px;text-shadow:8px 0 30px rgba(255,20,60,0.08);clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);transform:translateX(6px) skewX(6deg);}
+@keyframes slice { 0%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(2px)}60%{transform:translateX(-3px)}80%{transform:translateX(1px)}100%{transform:translateX(0)} }
+.brand.glitch::before,.brand.glitch::after{animation:slice 3s infinite steps(6)}
 
 /* subtitle */
 .subtitle{margin:6px 0 18px;color:var(--muted);font-size:clamp(13px,2.6vw,16px)}
 
 /* socials */
-.socials{display:flex;gap:12px;justify-content:center;margin-top:10px}
-.social{display:inline-grid;place-items:center;width:56px;height:56px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.006), transparent);color:var(--muted);transition:all .28s;box-shadow:0 12px 40px rgba(0,0,0,0.5)}
+.socials{display:flex;gap:12px;justify-content:center;margin-top:12px}
+.social{display:inline-grid;place-items:center;width:62px;height:62px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);background:linear-gradient(180deg, rgba(255,255,255,0.006), transparent);color:var(--muted);transition:all .28s;box-shadow:0 12px 40px rgba(0,0,0,0.45)}
 .social svg{width:22px;height:22px}
-.social:hover{transform:translateY(-6px) scale(1.06);color:#fff;box-shadow:0 30px 100px rgba(255,0,79,0.10)}
+.social:hover{transform:translateY(-8px) scale(1.06);color:#fff;box-shadow:0 36px 120px rgba(255,0,79,0.12)}
 .social.primary{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#060405;border:none;box-shadow:0 18px 80px rgba(255,0,79,0.14)}
 
-/* small footer */
+/* footer & toast */
 .site-footer{margin-top:18px;color:rgba(255,255,255,0.12);font-size:13px}
-
-/* toast */
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:28px;padding:10px 16px;border-radius:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:13px;opacity:0;pointer-events:none;transition:all 240ms;z-index:999}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:26px;padding:10px 14px;border-radius:10px;background:rgba(0,0,0,0.6);color:#fff;font-size:13px;opacity:0;pointer-events:none;transition:all 240ms;z-index:999}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(-6px)}
 
 /* animations */
-@keyframes slowDrift { from{transform:translate3d(0,0,0)} to{transform:translate3d(-8%, -6%, 0)} }
-@keyframes slowDriftRev { from{transform:translate3d(0,0,0)} to{transform:translate3d(8%, 6%, 0)} }
+@keyframes drift { from{transform:translate3d(0,0,0)} to{transform:translate3d(-8%, -6%, 0)} }
+@keyframes driftRev { from{transform:translate3d(0,0,0)} to{transform:translate3d(8%, 6%, 0)} }
 
 /* responsive */
 @media (max-width:720px){
-  .card{padding:20px;border-radius:10px}
-  .logo{height:58px}
-  .brand{font-size:clamp(26px,8vw,40px);letter-spacing:2px}
-  .social{width:48px;height:48px}
+  .card{padding:18px;border-radius:10px}
+  .logo{height:64px}
+  .brand{font-size:clamp(24px,9vw,40px)}
+  .social{width:52px;height:52px}
+}
+
+/* reduced motion fallback */
+@media (prefers-reduced-motion: reduce){
+  .fog-layer, .brand.glitch::before, .brand.glitch::after { animation: none !important; }
+  #bgCanvas { display:none; }
 }
