@@ -1,150 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Yokoso Watashino Website</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: radial-gradient(circle, #0d0d0d 0%, #000000 100%);
-      overflow: hidden;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: #ff003c;
-    }
-
-    h1 {
-      font-size: 3em;
-      margin-bottom: 30px;
-      text-shadow: 0 0 20px #ff003c, 0 0 40px #ff003c;
-      animation: glitch 1s infinite;
-    }
-
-    @keyframes glitch {
-      0% { transform: translate(0); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(-2px, -2px); }
-      60% { transform: translate(2px, 2px); }
-      80% { transform: translate(2px, -2px); }
-      100% { transform: translate(0); }
-    }
-
-    .btn-container {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      z-index: 10;
-    }
-
-    .btn {
-      padding: 15px 30px;
-      background-color: transparent;
-      border: 2px solid #ff003c;
-      border-radius: 50px;
-      color: #ff003c;
-      font-size: 1.2em;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      text-align: center;
-      position: relative;
-    }
-
-    .btn:hover {
-      background-color: #ff003c;
-      color: #000;
-      transform: scale(1.1);
-      box-shadow: 0 0 20px #ff003c, 0 0 40px #ff003c;
-    }
-
-    .footer {
-      position: absolute;
-      bottom: 15px;
-      font-size: 0.9em;
-      opacity: 0.7;
-      color: #ff003c;
-      z-index: 10;
-    }
-
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      top: 0;
-      left: 0;
-    }
-
-    /* Add any music styling here (optional) */
-    audio {
-      display: none;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TENSEROID — FINAL</title>
+  <meta name="theme-color" content="#050405"/>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Vanta (nodes) -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.126.1/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.21/dist/vanta.net.min.js"></script>
 </head>
 <body>
-  <div id="particles-js"></div>
-  <h1>Yokoso Watashino Website</h1>
-  <p>Welcome to the official website of Tenseroid</p>
-  <div class="btn-container">
-    <a href="https://instagram.com/tenseroid" target="_blank" class="btn">📸 Instagram</a>
-    <a href="https://discord.com/users/123456789012345678" target="_blank" class="btn">💬 Discord</a>
-    <a href="https://youtube.com/@tenseroid" target="_blank" class="btn">🎥 YouTube</a>
-  </div>
-  <div class="footer">Made by Tenseroid ⚡</div>
+  <div id="vanta-bg"></div>
+  <div class="noise"></div>
 
-  <!-- Music -->
-  <audio id="theme-song" loop autoplay>
-    <source src="https://files.catbox.moe/1cd5qo.mp3" type="audio/mpeg">
-  </audio>
+  <main class="wrap" role="main">
+    <header class="header">
+      <img src="logo.svg" alt="TENSEROID" class="logo">
+      <div class="tag">FINAL</div>
+    </header>
 
-  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-  <script>
-    // Particles.js code
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: "#ff003c" },
-        shape: { type: "circle" },
-        opacity: { value: 0.5 },
-        size: { value: 3, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#ff003c",
-          opacity: 0.4,
-          width: 1,
-        },
-        move: {
-          enable: true,
-          speed: 3,
-          out_mode: "out",
-        },
-      },
-      interactivity: {
-        events: {
-          onhover: { enable: true, mode: "grab" },
-          onclick: { enable: true, mode: "push" },
-        },
-        modes: {
-          grab: { distance: 200, line_linked: { opacity: 1 } },
-          push: { particles_nb: 4 },
-        },
-      },
-      retina_detect: true,
-    });
-  </script>
-  <link rel="stylesheet" href="style.css">
-<script src="script.js"></script>
+    <section class="panel">
+      <h1 class="hero" id="hero">TENSEROID</h1>
+      <p class="sub">Presence. Control. Legacy.</p>
+
+      <div class="actions" role="navigation" aria-label="links">
+        <a class="btn" href="https://instagram.com/tenseroid" target="_blank" rel="noopener">📸 Instagram</a>
+        <button class="btn" id="copy-discord">💬 Copy Discord</button>
+        <a class="btn primary" href="https://www.youtube.com/@tenseroid" target="_blank" rel="noopener">🎥 YouTube</a>
+        <a class="btn" id="download-vcard">📁 Save Card</a>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="monologue" id="monologue" aria-live="polite"></div>
+    </section>
+
+    <aside class="stats" aria-hidden="true">
+      <div>LVL <strong>9999</strong></div>
+      <div>INFLUENCE <strong>∞</strong></div>
+      <div>SYS <kbd>I</kbd> / GOD <kbd>G</kbd></div>
+    </aside>
+  </main>
+
+  <footer class="foot">Made by <strong>TENSEROID</strong> ⚡</footer>
+
+  <div class="toast" id="toast">copied</div>
+
+  <audio id="amb" loop preload="auto"><source src="https://cdn.pixabay.com/download/audio/2021/08/08/audio_9f0fb4a7c9.mp3?filename=dark-ambient-110855.mp3" type="audio/mpeg"></audio>
+  <audio id="tick" preload="auto"><source src="https://cdn.pixabay.com/download/audio/2023/03/11/audio_7f7d9a6a72.mp3?filename=ui-tick-6299.mp3" type="audio/mpeg"></audio>
+
+  <script src="script.js"></script>
 </body>
 </html>
